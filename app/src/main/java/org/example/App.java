@@ -2,23 +2,23 @@ package org.example;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class App extends Application {
     @Override
     public void start(Stage stage) {
-        Label label = new Label("Hello, JavaFX with Gradle!");
-        StackPane root = new StackPane(label);
-        Scene scene = new Scene(root, 300, 200);
-
-        stage.setTitle("JavaFX with Gradle");
+        GridPane gridPane = new GridPane();
+        _minefield = new Minefield(gridPane, 10, 10);
+        Scene scene = new Scene(gridPane, _minefield.Width * 50,
+                _minefield.Height * 50);
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
+
+    private Minefield _minefield;
 }

@@ -4,8 +4,11 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 
+import javafx.scene.input.MouseButton;
+import javafx.scene.layout.GridPane;
+
 public class Minefield {
-    public Minefield(int width, int height) {
+    public Minefield(GridPane gridPane, int width, int height) {
         Random random = new Random();
         Width = width;
         Height = height;
@@ -13,6 +16,14 @@ public class Minefield {
         _remaining = 0;
         forEachMine((i, j) -> {
             _minefield[i][j] = new Mine(0.8 < random.nextDouble());
+            gridPane.add(_minefield[i][j].getButton(), i, j);
+            _minefield[i][j].getButton().setOnMouseClicked(event -> {
+                if (event.getButton() == MouseButton.PRIMARY) {
+                    clear(i, j);
+                } else {
+                    flag(i, j);
+                }
+            });
             if (_minefield[i][j].hasMine) {
                 _remaining++;
             }
@@ -38,19 +49,26 @@ public class Minefield {
         if (_minefield[x][y].IsCleared()) {
             return true;
         }
+        _minefield[x][y].clear();
         if (_minefield[x][y].hasMine) {
             return false;
         }
-        explore(x, y);
+        forEachNeighbour(x, y, (i, j) -> explore(i, j));
         return true;
     }
 
     private void explore(int x, int y) {
-        if (!_minefield[x][y].IsCleared() || !_minefield[x][y].hasMine &&
-                _minefield[x][y].getNeighbourCount() == 0) {
-            _minefield[x][y].clear();
-            _remaining--;
-            forEachNeighbour(x, y, (i, j) -> explore(i, j));
+        if (!validatePosition(x, y) || _minefield[x][y].hasMine ||
+                _minefield[x][y].IsCleared()) {
+            return;
+        }
+        _minefield[x][y].clear();
+        _remaining--;
+        if (_minefield[x][y].getNeighbourCount() == 0) {
+            explore(x + 1, y);
+            explore(x - 1, y);
+            explore(x, y + 1);
+            explore(x, y - 1);
         }
     }
 
