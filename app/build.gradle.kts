@@ -8,7 +8,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
-    id("org.openjfx.javafxplugin") version "0.0.14"
+    id("org.openjfx.javafxplugin") version "0.1.0"
 }
 
 repositories {
@@ -19,6 +19,7 @@ repositories {
 dependencies {
     // This dependency is used by the application.
     implementation(libs.guava)
+    implementation("org.openjfx:javafx-controls:17.0.8")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -34,6 +35,6 @@ application {
 }
 
 javafx {
-    version = "17"
-    modules = listOf("javafx.controls", "javafx.fxml")
+    version = "17.0.8"
+    modules = listOf("javafx.controls")
 }
