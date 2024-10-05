@@ -51,6 +51,7 @@ public class Minefield {
         }
         _minefield[x][y].clear();
         if (_minefield[x][y].hasMine) {
+            forEachMine((i, j) -> clear(i, j));
             return false;
         }
         forEachNeighbour(x, y, (i, j) -> explore(i, j));
