@@ -7,8 +7,7 @@ import javafx.stage.Stage;
 public final class App extends Application {
     @Override
     public void start(Stage stage) {
-        MineField field = new MineField(15, 20);
-        Scene scene = new Scene(field);
+        Scene scene = new Scene(new MineField(15, 15));
         scene.getStylesheets().add("/style.css");
         stage.setScene(scene);
         stage.show();
