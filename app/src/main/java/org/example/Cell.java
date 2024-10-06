@@ -3,6 +3,7 @@ package org.example;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
+import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.Cursor;
 import javafx.scene.image.ImageView;
@@ -11,23 +12,21 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.Parent;
 
 public final class Cell extends Button {
-    public Cell(int x, int y) {
-        getStyleClass().addAll("borderless", "cell", "cell" + getStyleID(x, y));
-        setCursor(Cursor.HAND);
-        setOnMouseClicked(event -> {
-            if (event.getButton() == MouseButton.PRIMARY) {
-                reveal();
-            } else if (event.getButton() == MouseButton.SECONDARY) {
-                flag();
-            }
+    public Cell() {
+        Platform.runLater(() -> {
+            getStyleClass().addAll("borderless", "cell", "cell" + getStyleID());
+            setCursor(Cursor.HAND);
+            setOnMouseClicked(event -> {
+                if (event.getButton() == MouseButton.PRIMARY) {
+                    reveal();
+                } else if (event.getButton() == MouseButton.SECONDARY) {
+                    flag();
+                }
+            });
         });
         _hasMine = false;
         _isFlagged = false;
         _isRevealed = false;
-    }
-
-    public void placeMine() {
-        _hasMine = true;
     }
 
     private MineField getField() {
@@ -43,31 +42,31 @@ public final class Cell extends Button {
         return GridPane.getRowIndex(this);
     }
 
-    private static int getStyleID(int x, int y) {
-        return x % 2 == 0
-                ? y % 2 == 0
+    private int getStyleID() {
+        return getX() % 2 == 0
+                ? getY() % 2 == 0
                         ? 1
                         : 2
-                : y % 2 == 0
+                : getY() % 2 == 0
                         ? 2
                         : 1;
     }
 
-    private int getStyleID() {
-        return getStyleID(getX(), getY());
+    public void placeMine() {
+        _hasMine = true;
     }
 
     private void flag() {
-        if (_isRevealed) {
+        if (!getField().isInitialized() || _isRevealed) {
             return;
         }
         _isFlagged = !_isFlagged;
         if (_isFlagged) {
-            ImageView imageView = new ImageView(Resources.instance.getFlag());
-            imageView.setFitWidth(getWidth());
-            imageView.setFitHeight(getHeight());
-            imageView.setPreserveRatio(true);
-            setGraphic(imageView);
+            ImageView image = new ImageView(Resources.instance.getFlag());
+            image.setFitWidth(getWidth());
+            image.setFitHeight(getHeight());
+            image.setPreserveRatio(true);
+            setGraphic(image);
         } else {
             setGraphic(null);
         }
@@ -128,13 +127,13 @@ public final class Cell extends Button {
     }
 
     private int getAdjacentMineCount() {
-        AtomicInteger adjacentMineCount = new AtomicInteger();
+        AtomicInteger count = new AtomicInteger();
         forEachAdjacentCell(cell -> {
             if (cell._hasMine) {
-                adjacentMineCount.incrementAndGet();
+                count.incrementAndGet();
             }
         });
-        return adjacentMineCount.get();
+        return count.get();
     }
 
     private boolean _hasMine;

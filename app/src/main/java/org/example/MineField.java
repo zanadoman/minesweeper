@@ -2,8 +2,6 @@ package org.example;
 
 import java.util.Random;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Node;
 
@@ -37,14 +35,9 @@ public final class MineField extends GridPane {
         _cells = new Cell[columnCount][rowCount];
         for (int i = 0; i < columnCount; i++) {
             for (int j = 0; j < rowCount; j++) {
-                add(new Cell(i, j), i, j);
+                add(new Cell(), i, j);
             }
         }
-    }
-
-    @Override
-    public ObservableList<Node> getChildren() {
-        return FXCollections.observableList(super.getChildren());
     }
 
     public Cell[][] getCells() {
