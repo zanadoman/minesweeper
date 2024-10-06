@@ -8,7 +8,6 @@ public final class Mine {
     public Mine(int x, int y, boolean hasMine) {
         _style = y % 2 == 0 ? x % 2 == 0 ? 1 : 2 : x % 2 == 0 ? 2 : 1;
         _button = new Button();
-        _button.setFocusTraversable(false);
         _button.setCursor(Cursor.HAND);
         _button.getStyleClass().add("borderless");
         _button.getStyleClass().add("mine");
