@@ -9,7 +9,6 @@ public final class App extends Application {
     @Override
     public void start(Stage stage) {
         MineField field = new MineField(15, 15);
-        field.getChildren().remove(3);
         Scene scene = new Scene(field);
         scene.getStylesheets().add("/style.css");
         stage.setTitle("Minesweeper");
