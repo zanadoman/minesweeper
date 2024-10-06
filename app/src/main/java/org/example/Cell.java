@@ -10,8 +10,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 public final class Cell extends Button {
-    public Cell(boolean hasMine) throws Exception {
-        getStyleClass().addAll("borderless", "mine", "mine" + getStyleID());
+    public Cell(boolean hasMine) {
+        getStyleClass().addAll("borderless", "mine", "mine1");
         setCursor(Cursor.HAND);
         setOnMouseClicked(event -> {
             switch (event.getButton()) {
@@ -58,6 +58,8 @@ public final class Cell extends Button {
             imageView.setFitHeight(getHeight());
             imageView.setPreserveRatio(true);
             setGraphic(imageView);
+        } else {
+            setGraphic(null);
         }
     }
 
@@ -83,8 +85,9 @@ public final class Cell extends Button {
             if (0 < getAdjacentMineCount()) {
                 getStyleClass().add("neighbour-count" + getAdjacentMineCount());
                 setText(Integer.toString(getAdjacentMineCount()));
+            } else {
+                forEachAdjacentCell(cell -> cell.explore());
             }
-            forEachAdjacentCell(cell -> cell.explore());
         }
         setCursor(Cursor.DEFAULT);
     }
@@ -94,7 +97,9 @@ public final class Cell extends Button {
             return;
         }
         reveal();
+        System.out.println(getAdjacentMineCount());
         if (getAdjacentMineCount() == 0) {
+            System.out.println(getAdjacentMineCount());
             forEachAdjacentCell(cell -> cell.explore());
         }
     }

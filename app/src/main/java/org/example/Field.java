@@ -1,20 +1,28 @@
 package org.example;
 
+import java.util.Random;
+
 import javafx.collections.ObservableList;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Node;
 
 public final class Field extends GridPane {
     public Field(int width, int height) {
+        Random random = new Random();
         this.width = width;
         this.height = height;
         cells = new Cell[this.width][this.height];
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                add(new Cell(0.8 < random.nextDouble()), x, y);
+            }
+        }
     }
 
-    @Override
-    public ObservableList<Node> getChildren() {
-        throw new UnsupportedOperationException("Illegal operation");
-    }
+    // @Override
+    // public ObservableList<Node> getChildren() {
+    //     throw new UnsupportedOperationException("Illegal operation");
+    // }
 
     public Cell getChildren(int x, int y) {
         return cells[x][y];
