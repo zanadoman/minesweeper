@@ -1,7 +1,6 @@
 package org.example;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -12,15 +11,11 @@ public final class App extends Application {
         Scene scene = new Scene(field);
         scene.getStylesheets().add("/style.css");
         stage.setTitle("Minesweeper");
+        stage.setMinWidth(15 * 50);
+        stage.setMinHeight(15 * 50);
+        stage.setMaxWidth(stage.getMinWidth());
+        stage.setMaxHeight(stage.getMinHeight());
         stage.setScene(scene);
-        Platform.runLater(() -> {
-            stage.setMinWidth(field.getWidth());
-            stage.setMinHeight(field.getHeight());
-            stage.setMaxWidth(stage.getMinWidth());
-            stage.setMaxHeight(stage.getMinHeight());
-            stage.setWidth(stage.getMinWidth());
-            stage.setHeight(stage.getMinHeight());
-        });
         stage.show();
     }
 
