@@ -3,6 +3,16 @@
     -fx-border: none;
 }
 
+.mine {
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+    -fx-max-width: 50px;
+    -fx-max-height: 50px;
+    -fx-clip: rect(0, 50px, 50px, 0);
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
 .mine1 {
     -fx-background-color: #AAD751;
 }

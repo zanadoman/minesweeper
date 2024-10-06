@@ -2,15 +2,17 @@ package org.example;
 
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 
 public final class Mine {
     public Mine(int x, int y, boolean hasMine) {
         _style = y % 2 == 0 ? x % 2 == 0 ? 1 : 2 : x % 2 == 0 ? 2 : 1;
         _button = new Button();
-        _button.setPrefSize(50, 50);
+        // _button.setPrefSize(50, 50);
         _button.setFocusTraversable(false);
         _button.setCursor(Cursor.HAND);
         _button.getStyleClass().add("borderless");
+        _button.getStyleClass().add("mine");
         _button.getStyleClass().add("mine" + _style);
         this.x = x;
         this.y = y;
@@ -36,9 +38,18 @@ public final class Mine {
     }
 
     public void flag() {
+        if (IsCleared()) {
+            return;
+        }
         _isFlagged = !IsFlagged();
-        if (!IsCleared()) {
-            _button.setText(IsFlagged() ? "X" : "");
+        if (IsFlagged()) {
+            ImageView imageView = new ImageView(Resources.instance.getFlag());
+            imageView.setFitWidth(40);
+            imageView.setFitHeight(40);
+            imageView.setPreserveRatio(true);
+            _button.setGraphic(imageView);
+        } else {
+            _button.setGraphic(null);
         }
     }
 
