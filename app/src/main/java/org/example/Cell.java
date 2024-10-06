@@ -30,11 +30,8 @@ public final class Cell extends Button {
         _isRevealed = false;
     }
 
-    private Field getField() throws Exception {
+    private Field getField() {
         Parent parent = getParent();
-        if (!(parent instanceof Field)) {
-            throw new IllegalStateException("Illegal Parent");
-        }
         return (Field) parent;
     }
 
@@ -64,7 +61,7 @@ public final class Cell extends Button {
         }
     }
 
-    private void reveal() throws Exception {
+    private void reveal() {
         if (_isRevealed || _isFlagged) {
             return;
         }
@@ -92,7 +89,7 @@ public final class Cell extends Button {
         setCursor(Cursor.DEFAULT);
     }
 
-    private void explore() throws Exception {
+    private void explore() {
         if (hasMine || _isRevealed) {
             return;
         }
@@ -102,7 +99,7 @@ public final class Cell extends Button {
         }
     }
 
-    private void forEachAdjacentCell(Consumer<Cell> operation) throws Exception {
+    private void forEachAdjacentCell(Consumer<Cell> operation) {
         for (int x = getX() - 1; x <= getX() + 1; x++) {
             for (int y = getY() - 1; y <= getY() + 1; y++) {
                 if (0 <= x && x < getField().width && 0 <= y && y < getField().height) {
@@ -112,7 +109,7 @@ public final class Cell extends Button {
         }
     }
 
-    private int getAdjacentMineCount() throws Exception {
+    private int getAdjacentMineCount() {
         AtomicInteger adjacentMineCount = new AtomicInteger();
         forEachAdjacentCell(cell -> {
             if (cell.hasMine) {
