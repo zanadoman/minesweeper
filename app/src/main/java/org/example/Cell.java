@@ -3,14 +3,14 @@ package org.example;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
-import javafx.scene.Cursor;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.Cursor;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.Parent;
 
 public final class Cell extends Button {
-    public Cell(boolean hasMine) {
+    public Cell() {
         getStyleClass().addAll("borderless", "mine", "mine1");
         setCursor(Cursor.HAND);
         setOnMouseClicked(event -> {
@@ -25,14 +25,18 @@ public final class Cell extends Button {
                     break;
             }
         });
-        this.hasMine = hasMine;
+        _hasMine = false;
         _isFlagged = false;
         _isRevealed = false;
     }
 
-    private Field getField() {
+    public void placeMine() {
+        _hasMine = true;
+    }
+
+    private MineField getField() {
         Parent parent = getParent();
-        return (Field) parent;
+        return (MineField) parent;
     }
 
     private int getX() {
@@ -44,7 +48,13 @@ public final class Cell extends Button {
     }
 
     private int getStyleID() {
-        return getX() % 2 == 0 ? getY() % 2 == 0 ? 1 : 2 : getY() % 2 == 0 ? 2 : 1;
+        return getX() % 2 == 0
+                ? getY() % 2 == 0
+                        ? 1
+                        : 2
+                : getY() % 2 == 0
+                        ? 2
+                        : 1;
     }
 
     private void flag() {
@@ -69,12 +79,15 @@ public final class Cell extends Button {
         }
         _isRevealed = true;
         getStyleClass().remove("mine" + getStyleID());
-        if (hasMine) {
+        if (!getField().isInitialized()) {
+            getField().initialize(getX(), getY());
+        }
+        if (_hasMine) {
             getStyleClass().add("mine" + getStyleID() + "-exploded");
             setGraphic(null);
-            for (Cell[] cells : getField().cells) {
+            for (Cell[] cells : getField().getCells()) {
                 for (Cell cell : cells) {
-                    if (cell.hasMine) {
+                    if (cell._hasMine) {
                         cell.reveal();
                     }
                 }
@@ -93,7 +106,7 @@ public final class Cell extends Button {
     }
 
     private void explore() {
-        if (hasMine || _isRevealed) {
+        if (_hasMine || _isRevealed) {
             return;
         }
         reveal();
@@ -107,8 +120,9 @@ public final class Cell extends Button {
     private void forEachAdjacentCell(Consumer<Cell> operation) {
         for (int x = getX() - 1; x <= getX() + 1; x++) {
             for (int y = getY() - 1; y <= getY() + 1; y++) {
-                if (0 <= x && x < getField().width && 0 <= y && y < getField().height) {
-                    operation.accept(getField().cells[x][y]);
+                if (0 <= x && x < getField().getColumnCount()
+                        && 0 <= y && y < getField().getRowCount()) {
+                    operation.accept(getField().getCells()[x][y]);
                 }
             }
         }
@@ -117,14 +131,14 @@ public final class Cell extends Button {
     private int getAdjacentMineCount() {
         AtomicInteger adjacentMineCount = new AtomicInteger();
         forEachAdjacentCell(cell -> {
-            if (cell.hasMine) {
+            if (cell._hasMine) {
                 adjacentMineCount.incrementAndGet();
             }
         });
         return adjacentMineCount.get();
     }
 
-    private final boolean hasMine;
+    private boolean _hasMine;
     private boolean _isFlagged;
     private boolean _isRevealed;
 }
