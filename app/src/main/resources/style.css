@@ -3,7 +3,7 @@
     -fx-border: none;
 }
 
-.mine {
+.cell {
     -fx-min-width: 50px;
     -fx-min-height: 50px;
     -fx-max-width: 50px;
@@ -12,31 +12,31 @@
     -fx-font-weight: bold;
 }
 
-.mine1 {
+.cell1 {
     -fx-background-color: #AAD751;
 }
 
-.mine2 {
+.cell2 {
     -fx-background-color: #A2D149;
 }
 
-.mine1:hover, .mine2:hover {
+.cell1:hover, .cell2:hover {
     -fx-background-color: #A2BF6A;
 }
 
-.mine1-cleared {
+.cell1-revealed {
     -fx-background-color: #E5C29F;
 }
 
-.mine2-cleared {
+.cell2-revealed {
     -fx-background-color: #D7B899;
 }
 
-.mine1-exploded {
+.cell1-exploded {
     -fx-background-color: #F23607;
 }
 
-.mine2-exploded {
+.cell2-exploded {
     -fx-background-color: #E63307;
 }
 

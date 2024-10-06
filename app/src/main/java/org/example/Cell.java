@@ -11,7 +11,7 @@ import javafx.scene.Parent;
 
 public final class Cell extends Button {
     public Cell() {
-        getStyleClass().addAll("borderless", "mine", "mine1");
+        getStyleClass().addAll("borderless", "cell", "cell1");
         setCursor(Cursor.HAND);
         setOnMouseClicked(event -> {
             switch (event.getButton()) {
@@ -78,12 +78,12 @@ public final class Cell extends Button {
             return;
         }
         _isRevealed = true;
-        getStyleClass().remove("mine" + getStyleID());
+        getStyleClass().remove("cell" + getStyleID());
         if (!getField().isInitialized()) {
             getField().initialize(getX(), getY());
         }
         if (_hasMine) {
-            getStyleClass().add("mine" + getStyleID() + "-exploded");
+            getStyleClass().add("cell" + getStyleID() + "-exploded");
             setGraphic(null);
             for (Cell[] cells : getField().getCells()) {
                 for (Cell cell : cells) {
@@ -93,7 +93,7 @@ public final class Cell extends Button {
                 }
             }
         } else {
-            getStyleClass().add("mine" + getStyleID() + "-cleared");
+            getStyleClass().add("cell" + getStyleID() + "-revealed");
             setGraphic(null);
             if (0 < getAdjacentMineCount()) {
                 getStyleClass().add("neighbour-count" + getAdjacentMineCount());
@@ -110,9 +110,7 @@ public final class Cell extends Button {
             return;
         }
         reveal();
-        System.out.println(getAdjacentMineCount());
         if (getAdjacentMineCount() == 0) {
-            System.out.println(getAdjacentMineCount());
             forEachAdjacentCell(cell -> cell.explore());
         }
     }
