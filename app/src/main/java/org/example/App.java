@@ -9,6 +9,12 @@ public final class App extends Application {
     public void start(Stage stage) {
         Scene scene = new Scene(new MineField(15, 15));
         scene.getStylesheets().add("/style.css");
+        stage.setTitle("Minesweeper");
+        stage.setMinWidth(15 * 50);
+        stage.setMinHeight(15 * 50);
+        stage.setMaxWidth(15 * 50);
+        stage.setMaxHeight(15 * 50);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
