@@ -11,8 +11,9 @@ public final class App extends Application {
         Scene scene = new Scene(field);
         scene.getStylesheets().add("/style.css");
         stage.setTitle("Minesweeper");
-        stage.setMinWidth(15 * 50);
-        stage.setMinHeight(15 * 50);
+        stage.getIcons().add(Resources.instance.getFlag());
+        stage.setMinWidth(field.getColumnCount() * 50);
+        stage.setMinHeight(field.getRowCount() * 50);
         stage.setMaxWidth(stage.getMinWidth());
         stage.setMaxHeight(stage.getMinHeight());
         stage.setScene(scene);
