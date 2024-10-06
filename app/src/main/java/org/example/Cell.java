@@ -43,16 +43,6 @@ public final class Cell extends Button {
         return GridPane.getRowIndex(this);
     }
 
-    private int getStyleID() {
-        return getX() % 2 == 0
-                ? getY() % 2 == 0
-                        ? 1
-                        : 2
-                : getY() % 2 == 0
-                        ? 2
-                        : 1;
-    }
-
     private static int getStyleID(int x, int y) {
         return x % 2 == 0
                 ? y % 2 == 0
@@ -61,6 +51,10 @@ public final class Cell extends Button {
                 : y % 2 == 0
                         ? 2
                         : 1;
+    }
+
+    private int getStyleID() {
+        return getStyleID(getX(), getY());
     }
 
     private void flag() {
