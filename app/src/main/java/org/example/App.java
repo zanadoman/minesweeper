@@ -9,9 +9,11 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         GridPane gridPane = new GridPane();
-        _minefield = new Minefield(gridPane, 10, 10);
+        _minefield = new Minefield(gridPane, 11, 11);
         Scene scene = new Scene(gridPane, _minefield.Width * 50,
                 _minefield.Height * 50);
+        scene.getStylesheets()
+                .add(getClass().getResource("/style.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }

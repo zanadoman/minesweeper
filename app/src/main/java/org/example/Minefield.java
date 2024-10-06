@@ -4,7 +4,6 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 
 public class Minefield {
@@ -13,36 +12,25 @@ public class Minefield {
         Width = width;
         Height = height;
         _minefield = new Mine[Width][Height];
-        _remaining = 0;
         forEachMine((i, j) -> {
-            _minefield[i][j] = new Mine(0.8 < random.nextDouble());
+            _minefield[i][j] = new Mine(i, j, 0.8 < random.nextDouble());
             gridPane.add(_minefield[i][j].getButton(), i, j);
             _minefield[i][j].getButton().setOnMouseClicked(event -> {
-                if (event.getButton() == MouseButton.PRIMARY) {
-                    clear(i, j);
-                } else {
-                    flag(i, j);
+                switch (event.getButton()) {
+                    case PRIMARY:
+                        clear(i, j);
+                        break;
+                    case SECONDARY:
+                        _minefield[i][j].flag();
+                        break;
+                    default:
+                        break;
                 }
             });
-            if (_minefield[i][j].hasMine) {
-                _remaining++;
-            }
         });
         forEachMine((i, j) -> {
             _minefield[i][j].setNeighbourCount(getNeighbourCount(i, j));
         });
-    }
-
-    public Mine get(int x, int y) {
-        return (Mine) _minefield[x][y].clone();
-    }
-
-    public int getRemaining() {
-        return _remaining;
-    }
-
-    public void flag(int x, int y) {
-        _minefield[x][y].flag();
     }
 
     public boolean clear(int x, int y) {
@@ -64,12 +52,8 @@ public class Minefield {
             return;
         }
         _minefield[x][y].clear();
-        _remaining--;
         if (_minefield[x][y].getNeighbourCount() == 0) {
-            explore(x + 1, y);
-            explore(x - 1, y);
-            explore(x, y + 1);
-            explore(x, y - 1);
+            forEachNeighbour(x, y, (i, j) -> explore(i, j));
         }
     }
 
@@ -108,5 +92,4 @@ public class Minefield {
     final int Width;
     final int Height;
     private Mine[][] _minefield;
-    private int _remaining;
 }

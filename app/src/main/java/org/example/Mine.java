@@ -3,16 +3,20 @@ package org.example;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 
-public final class Mine implements Cloneable {
-    public Mine(boolean hasMine) {
+public final class Mine {
+    public Mine(int x, int y, boolean hasMine) {
+        _style = y % 2 == 0 ? x % 2 == 0 ? 1 : 2 : x % 2 == 0 ? 2 : 1;
         _button = new Button();
-        _button.setStyle("-fx-background-color: lightgrey;");
+        _button.setPrefSize(50, 50);
+        _button.setFocusTraversable(false);
         _button.setCursor(Cursor.HAND);
+        _button.getStyleClass().add("borderless");
+        _button.getStyleClass().add("mine" + _style);
+        this.x = x;
+        this.y = y;
         this.hasMine = hasMine;
         setNeighbourCount(0);
         _isFlagged = false;
-        _isCleared = false;
-        _button.setPrefSize(50, 50);
     }
 
     public Button getButton() {
@@ -45,22 +49,50 @@ public final class Mine implements Cloneable {
     public void clear() {
         _isCleared = true;
         if (hasMine) {
-            _button.setStyle("-fx-background-color: red;");
+            _button.setStyle(_button.getStyle() + "-fx-background-color: red;");
         } else {
-            _button.setStyle("-fx-background-color: lightgreen;");
+            _button.getStyleClass().remove("mine" + _style);
+            _button.getStyleClass().add("mine" + _style + "-explored");
         }
         if (0 < getNeighbourCount()) {
             _button.setText(Integer.toString(getNeighbourCount()));
+            String color;
+            switch (getNeighbourCount()) {
+                case 1:
+                    color = "#0000FD";
+                    break;
+                case 2:
+                    color = "#017E00";
+                    break;
+                case 3:
+                    color = "#FE0000";
+                    break;
+                case 4:
+                    color = "#010082";
+                    break;
+                case 5:
+                    color = "#830003";
+                    break;
+                case 6:
+                    color = "#008080";
+                    break;
+                case 7:
+                    color = "#000000";
+                    break;
+                default:
+                    color = "#808080";
+                    break;
+            }
+            _button.setStyle(_button.getStyle() + "-fx-text-fill: " + color + ';');
         }
     }
 
-    public Object clone() {
-        return new Mine(hasMine);
-    }
-
     private Button _button;
+    public final int x;
+    public final int y;
     public final boolean hasMine;
     private int _neighbourCount;
     private boolean _isFlagged;
     private boolean _isCleared;
+    private final int _style;
 }

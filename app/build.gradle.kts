@@ -37,3 +37,11 @@ javafx {
     version = "17.0.8"
     modules = listOf("javafx.controls")
 }
+
+sourceSets {
+    val main by getting {
+        resources {
+            srcDir("./src/main/res/")
+        }
+    }
+}

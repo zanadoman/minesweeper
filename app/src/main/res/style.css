@@ -1,0 +1,28 @@
+.borderless {
+    -fx-background-radius: 0;
+    -fx-border: none;
+}
+
+.mine1 {
+    -fx-background-color: #AAD751;
+}
+
+.mine1:hover {
+    -fx-background-color: grey;
+}
+
+.mine2 {
+    -fx-background-color: #A2D149;
+}
+
+.mine2:hover {
+    -fx-background-color: grey;
+}
+
+.mine1-explored {
+    -fx-background-color: #E5C29F;
+}
+
+.mine2-explored {
+    -fx-background-color: #D7B899;
+}
