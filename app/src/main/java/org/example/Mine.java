@@ -8,14 +8,11 @@ public final class Mine {
     public Mine(int x, int y, boolean hasMine) {
         _style = y % 2 == 0 ? x % 2 == 0 ? 1 : 2 : x % 2 == 0 ? 2 : 1;
         _button = new Button();
-        // _button.setPrefSize(50, 50);
         _button.setFocusTraversable(false);
         _button.setCursor(Cursor.HAND);
         _button.getStyleClass().add("borderless");
         _button.getStyleClass().add("mine");
         _button.getStyleClass().add("mine" + _style);
-        this.x = x;
-        this.y = y;
         this.hasMine = hasMine;
         setNeighbourCount(0);
         _isFlagged = false;
@@ -44,8 +41,8 @@ public final class Mine {
         _isFlagged = !IsFlagged();
         if (IsFlagged()) {
             ImageView imageView = new ImageView(Resources.instance.getFlag());
-            imageView.setFitWidth(40);
-            imageView.setFitHeight(40);
+            imageView.setFitWidth(_button.getWidth());
+            imageView.setFitHeight(_button.getHeight());
             imageView.setPreserveRatio(true);
             _button.setGraphic(imageView);
         } else {
@@ -59,48 +56,18 @@ public final class Mine {
 
     public void clear() {
         _isCleared = true;
-        if (hasMine) {
-            _button.setStyle(_button.getStyle() + "-fx-background-color: red;");
-        } else {
-            _button.getStyleClass().remove("mine" + _style);
-            _button.getStyleClass().add("mine" + _style + "-explored");
-        }
-        if (0 < getNeighbourCount()) {
+        _button.getStyleClass().remove("mine" + _style);
+        _button.getStyleClass().add("mine" + _style + '-' +
+                (hasMine ? "exploded" : "cleared"));
+        if (!hasMine && 0 < getNeighbourCount()) {
             _button.setText(Integer.toString(getNeighbourCount()));
-            String color;
-            switch (getNeighbourCount()) {
-                case 1:
-                    color = "#0000FD";
-                    break;
-                case 2:
-                    color = "#017E00";
-                    break;
-                case 3:
-                    color = "#FE0000";
-                    break;
-                case 4:
-                    color = "#010082";
-                    break;
-                case 5:
-                    color = "#830003";
-                    break;
-                case 6:
-                    color = "#008080";
-                    break;
-                case 7:
-                    color = "#000000";
-                    break;
-                default:
-                    color = "#808080";
-                    break;
-            }
-            _button.setStyle(_button.getStyle() + "-fx-text-fill: " + color + ';');
+            _button.getStyleClass().add("neighbour-count" + getNeighbourCount());
         }
+        _button.setCursor(Cursor.DEFAULT);
+        _button.setGraphic(null);
     }
 
     private Button _button;
-    public final int x;
-    public final int y;
     public final boolean hasMine;
     private int _neighbourCount;
     private boolean _isFlagged;

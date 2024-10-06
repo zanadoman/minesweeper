@@ -8,8 +8,7 @@
     -fx-min-height: 50px;
     -fx-max-width: 50px;
     -fx-max-height: 50px;
-    -fx-clip: rect(0, 50px, 50px, 0);
-    -fx-font-size: 20px;
+    -fx-font-size: 24px;
     -fx-font-weight: bold;
 }
 
@@ -17,22 +16,58 @@
     -fx-background-color: #AAD751;
 }
 
-.mine1:hover {
-    -fx-background-color: grey;
-}
-
 .mine2 {
     -fx-background-color: #A2D149;
 }
 
-.mine2:hover {
-    -fx-background-color: grey;
+.mine1:hover, .mine2:hover {
+    -fx-background-color: #A2BF6A;
 }
 
-.mine1-explored {
+.mine1-cleared {
     -fx-background-color: #E5C29F;
 }
 
-.mine2-explored {
+.mine2-cleared {
     -fx-background-color: #D7B899;
+}
+
+.mine1-exploded {
+    -fx-background-color: #F23607;
+}
+
+.mine2-exploded {
+    -fx-background-color: #E63307;
+}
+
+.neighbour-count1 {
+    -fx-text-fill: #0000FD;
+}
+
+.neighbour-count2 {
+    -fx-text-fill: #017E00;
+}
+
+.neighbour-count3 {
+    -fx-text-fill: #FE0000;
+}
+
+.neighbour-count4 {
+    -fx-text-fill: #010082;
+}
+
+.neighbour-count5 {
+    -fx-text-fill: #830003;
+}
+
+.neighbour-count6 {
+    -fx-text-fill: #008080;
+}
+
+.neighbour-count7 {
+    -fx-text-fill: #000000;
+}
+
+.neighbour-count8 {
+    -fx-text-fill: #808080;
 }
