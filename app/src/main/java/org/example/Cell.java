@@ -6,23 +6,19 @@ import java.util.function.Consumer;
 import javafx.scene.control.Button;
 import javafx.scene.Cursor;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Parent;
 
 public final class Cell extends Button {
-    public Cell() {
-        getStyleClass().addAll("borderless", "cell", "cell1");
+    public Cell(int x, int y) {
+        getStyleClass().addAll("borderless", "cell", "cell" + getStyleID(x, y));
         setCursor(Cursor.HAND);
         setOnMouseClicked(event -> {
-            switch (event.getButton()) {
-                case PRIMARY:
-                    reveal();
-                    break;
-                case SECONDARY:
-                    flag();
-                    break;
-                default:
-                    break;
+            if (event.getButton() == MouseButton.PRIMARY) {
+                reveal();
+            } else if (event.getButton() == MouseButton.SECONDARY) {
+                flag();
             }
         });
         _hasMine = false;
@@ -53,6 +49,16 @@ public final class Cell extends Button {
                         ? 1
                         : 2
                 : getY() % 2 == 0
+                        ? 2
+                        : 1;
+    }
+
+    private static int getStyleID(int x, int y) {
+        return x % 2 == 0
+                ? y % 2 == 0
+                        ? 1
+                        : 2
+                : y % 2 == 0
                         ? 2
                         : 1;
     }
@@ -88,6 +94,7 @@ public final class Cell extends Button {
             for (Cell[] cells : getField().getCells()) {
                 for (Cell cell : cells) {
                     if (cell._hasMine) {
+                        cell._isFlagged = false;
                         cell.reveal();
                     }
                 }
@@ -116,11 +123,11 @@ public final class Cell extends Button {
     }
 
     private void forEachAdjacentCell(Consumer<Cell> operation) {
-        for (int x = getX() - 1; x <= getX() + 1; x++) {
-            for (int y = getY() - 1; y <= getY() + 1; y++) {
-                if (0 <= x && x < getField().getColumnCount()
-                        && 0 <= y && y < getField().getRowCount()) {
-                    operation.accept(getField().getCells()[x][y]);
+        for (int i = getX() - 1; i <= getX() + 1; i++) {
+            for (int j = getY() - 1; j <= getY() + 1; j++) {
+                if (0 <= i && i < getField().getColumnCount()
+                        && 0 <= j && j < getField().getRowCount()) {
+                    operation.accept(getField().getCells()[i][j]);
                 }
             }
         }

@@ -37,7 +37,7 @@ public final class MineField extends GridPane {
         _cells = new Cell[columnCount][rowCount];
         for (int i = 0; i < columnCount; i++) {
             for (int j = 0; j < rowCount; j++) {
-                add(new Cell(), i, j);
+                add(new Cell(i, j), i, j);
             }
         }
     }
