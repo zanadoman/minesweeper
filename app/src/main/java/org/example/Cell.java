@@ -1,38 +1,105 @@
 package org.example;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
-
 import javafx.application.Platform;
-import javafx.scene.control.Button;
 import javafx.scene.Cursor;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
-import javafx.scene.Parent;
 
 public final class Cell extends Button {
     public Cell() {
         Platform.runLater(() -> {
             getStyleClass().addAll("borderless", "cell", "cell" + getStyleID());
             setCursor(Cursor.HAND);
-            setOnMouseClicked(event -> {
-                if (event.getButton() == MouseButton.PRIMARY) {
-                    reveal();
-                } else if (event.getButton() == MouseButton.SECONDARY) {
-                    flag();
+            setOnMouseClicked(mouseEvent -> {
+                if (isRevealed()) {
+                    return;
+                }
+                if (mouseEvent.getButton() == MouseButton.PRIMARY) {
+                    if (!isFlagged()) {
+                        ((MineField) getParent()).reveal(getX(), getY());
+                    }
+                } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                    if (isFlagged()) {
+                        removeFlag();
+                    } else {
+                        placeFlag();
+                    }
                 }
             });
         });
         _hasMine = false;
-        _isFlagged = false;
         _isRevealed = false;
+        _isFlagged = false;
     }
 
-    private MineField getField() {
-        Parent parent = getParent();
-        return (MineField) parent;
+    public boolean hasMine() {
+        return _hasMine;
+    }
+
+    public void placeMine() {
+        _hasMine = true;
+    }
+
+    public boolean isRevealed() {
+        return _isRevealed;
+    }
+
+    public void reveal(int adjacentMineCount) {
+        if (isRevealed() || isFlagged()) {
+            return;
+        }
+        _isRevealed = true;
+        getStyleClass().remove("cell" + getStyleID());
+        getStyleClass().add("cell-revealed" + getStyleID());
+        if (0 < adjacentMineCount) {
+            getStyleClass().add("cell-adjacent-mine-count" + adjacentMineCount);
+            setText(Integer.toString(adjacentMineCount));
+        }
+        setCursor(Cursor.DEFAULT);
+    }
+
+    public void explode() {
+        if (!hasMine() || isRevealed()) {
+            return;
+        }
+        if (isFlagged()) {
+            removeFlag();
+        }
+        _hasMine = false;
+        _isRevealed = true;
+        getStyleClass().remove("cell" + getStyleID());
+        getStyleClass().add("cell-exploded" + App.random.nextInt(1, 9));
+        Circle circle = new Circle((getWidth() + getHeight()) / 8);
+        circle.getStyleClass().add("cell-circle");
+        setGraphic(circle);
+        setCursor(Cursor.DEFAULT);
+    }
+
+    public boolean isFlagged() {
+        return _isFlagged;
+    }
+
+    public void placeFlag() {
+        if (isRevealed() || isFlagged()) {
+            return;
+        }
+        _isFlagged = true;
+        ImageView imageView = new ImageView(Resources.instance.getFlag());
+        imageView.setFitWidth(getWidth());
+        imageView.setFitHeight(getHeight());
+        imageView.setPreserveRatio(true);
+        setGraphic(imageView);
+    }
+
+    public void removeFlag() {
+        if (isRevealed() || !isFlagged()) {
+            return;
+        }
+        _isFlagged = false;
+        setGraphic(null);
     }
 
     private int getX() {
@@ -48,97 +115,7 @@ public final class Cell extends Button {
                 : getY() % 2 == 0 ? 2 : 1;
     }
 
-    public void placeMine() {
-        _hasMine = true;
-    }
-
-    private void flag() {
-        if (!getField().isInitialized() || _isRevealed) {
-            return;
-        }
-        _isFlagged = !_isFlagged;
-        if (_isFlagged) {
-            ImageView image = new ImageView(Resources.instance.getFlag());
-            image.setFitWidth(getWidth());
-            image.setFitHeight(getHeight());
-            image.setPreserveRatio(true);
-            setGraphic(image);
-        } else {
-            setGraphic(null);
-        }
-    }
-
-    private void reveal() {
-        if (_isRevealed || _isFlagged) {
-            return;
-        }
-        _isRevealed = true;
-        getStyleClass().remove("cell" + getStyleID());
-        if (!getField().isInitialized()) {
-            getField().initialize(getX(), getY());
-        }
-        if (_hasMine) {
-            getStyleClass()
-                    .add("cell-exploded" + App.random.nextInt(1, 9));
-            Circle circle = new Circle((getWidth() + getHeight()) / 8);
-            circle.getStyleClass().add("cell-circle");
-            setGraphic(circle);
-            for (Cell[] cells : getField().getCells()) {
-                for (Cell cell : cells) {
-                    if (cell._hasMine) {
-                        cell._isFlagged = false;
-                        cell.reveal();
-                    }
-                }
-            }
-        } else {
-            getStyleClass().add("cell-revealed" + getStyleID());
-            setGraphic(null);
-            if (0 < getAdjacentMineCount()) {
-                getStyleClass()
-                        .add("cell-adjacent-mine-count"
-                                + getAdjacentMineCount());
-                setText(Integer.toString(getAdjacentMineCount()));
-            } else {
-                forEachAdjacentCell(cell -> cell.explore());
-            }
-        }
-        setCursor(Cursor.DEFAULT);
-    }
-
-    private void explore() {
-        if (_hasMine || _isRevealed) {
-            return;
-        }
-        reveal();
-        if (getAdjacentMineCount() == 0) {
-            forEachAdjacentCell(cell -> cell.explore());
-        }
-    }
-
-    private void forEachAdjacentCell(Consumer<Cell> operation) {
-        for (int i = getX() - 1; i <= getX() + 1; i++) {
-            for (int j = getY() - 1; j <= getY() + 1; j++) {
-                if (0 <= i && i < getField().getColumnCount() && 0 <= j
-                        && j < getField().getRowCount()
-                        && (i != getX() || j != getY())) {
-                    operation.accept(getField().getCells()[i][j]);
-                }
-            }
-        }
-    }
-
-    private int getAdjacentMineCount() {
-        AtomicInteger count = new AtomicInteger();
-        forEachAdjacentCell(cell -> {
-            if (cell._hasMine) {
-                count.incrementAndGet();
-            }
-        });
-        return count.get();
-    }
-
     private boolean _hasMine;
-    private boolean _isFlagged;
     private boolean _isRevealed;
+    private boolean _isFlagged;
 }
