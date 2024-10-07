@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Spectral-Bold";
+  src: url("/Spectral-Bold.ttf");
+}
+
 .borderless {
     -fx-background-radius: 0;
     -fx-border: none;
@@ -8,6 +13,7 @@
     -fx-min-height: 50px;
     -fx-max-width: 50px;
     -fx-max-height: 50px;
+    -fx-font-family: "Spectral-Bold";
     -fx-font-size: 24px;
     -fx-font-weight: bold;
 }
