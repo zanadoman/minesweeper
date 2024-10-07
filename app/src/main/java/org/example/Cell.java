@@ -19,7 +19,9 @@ public final class Cell extends Button {
                 }
                 if (mouseEvent.getButton() == MouseButton.PRIMARY) {
                     if (!isFlagged()) {
-                        ((MineField) getParent()).reveal(getX(), getY());
+                        ((MineField) getParent()).reveal(
+                                GridPane.getColumnIndex(this),
+                                GridPane.getRowIndex(this));
                     }
                 } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                     if (!((MineField) getParent()).isInitialized()) {
@@ -54,7 +56,6 @@ public final class Cell extends Button {
         if (isRevealed() || isFlagged()) {
             return;
         }
-        _isRevealed = true;
         getStyleClass().remove("cell" + getStyleID());
         getStyleClass().add("cell-revealed" + getStyleID());
         if (0 < adjacentMineCount) {
@@ -62,6 +63,7 @@ public final class Cell extends Button {
             setText(Integer.toString(adjacentMineCount));
         }
         setCursor(Cursor.DEFAULT);
+        _isRevealed = true;
     }
 
     public void explode() {
@@ -71,14 +73,14 @@ public final class Cell extends Button {
         if (isFlagged()) {
             removeFlag();
         }
-        _hasMine = false;
-        _isRevealed = true;
         getStyleClass().remove("cell" + getStyleID());
         getStyleClass().add("cell-exploded" + App.random.nextInt(1, 9));
         Circle circle = new Circle((getWidth() + getHeight()) / 8);
         circle.getStyleClass().add("cell-circle");
         setGraphic(circle);
         setCursor(Cursor.DEFAULT);
+        _hasMine = false;
+        _isRevealed = true;
     }
 
     public boolean isFlagged() {
@@ -89,33 +91,26 @@ public final class Cell extends Button {
         if (isRevealed() || isFlagged()) {
             return;
         }
-        _isFlagged = true;
         ImageView imageView = new ImageView(Resources.instance.getFlag());
         imageView.setFitWidth(getWidth());
         imageView.setFitHeight(getHeight());
         imageView.setPreserveRatio(true);
         setGraphic(imageView);
+        _isFlagged = true;
     }
 
     public void removeFlag() {
         if (isRevealed() || !isFlagged()) {
             return;
         }
-        _isFlagged = false;
         setGraphic(null);
-    }
-
-    private int getX() {
-        return GridPane.getColumnIndex(this);
-    }
-
-    private int getY() {
-        return GridPane.getRowIndex(this);
+        _isFlagged = false;
     }
 
     private int getStyleID() {
-        return getX() % 2 == 0 ? getY() % 2 == 0 ? 1 : 2
-                : getY() % 2 == 0 ? 2 : 1;
+        return GridPane.getColumnIndex(this) % 2 == 0
+                ? GridPane.getRowIndex(this) % 2 == 0 ? 1 : 2
+                : GridPane.getRowIndex(this) % 2 == 0 ? 2 : 1;
     }
 
     private boolean _hasMine;

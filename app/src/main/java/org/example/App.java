@@ -10,14 +10,14 @@ import javafx.stage.StageStyle;
 public final class App extends Application {
     @Override
     public void start(Stage stage) {
-        MineField field = new MineField(15, 15);
-        Scene scene = new Scene(field);
+        MineField mineField = new MineField(15, 15);
+        Scene scene = new Scene(mineField);
         scene.getStylesheets().add("/style.css");
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Minesweeper");
         stage.getIcons().add(Resources.instance.getFlag());
-        stage.setMinWidth(field.getColumnCount() * 50);
-        stage.setMinHeight(field.getRowCount() * 50);
+        stage.setMinWidth(mineField.getColumnCount() * 50);
+        stage.setMinHeight(mineField.getRowCount() * 50);
         stage.setMaxWidth(stage.getMinWidth());
         stage.setMaxHeight(stage.getMinHeight());
         stage.setScene(scene);
