@@ -79,7 +79,7 @@ public final class Cell extends Button {
         }
         if (_hasMine) {
             getStyleClass()
-                    .add("cell-exploded" + getField().random.nextInt(1, 9));
+                    .add("cell-exploded" + App.random.nextInt(1, 9));
             Circle circle = new Circle((getWidth() + getHeight()) / 8);
             circle.getStyleClass().add("cell-circle");
             setGraphic(circle);

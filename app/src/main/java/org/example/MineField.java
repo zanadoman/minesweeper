@@ -1,7 +1,5 @@
 package org.example;
 
-import java.util.Random;
-
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Node;
@@ -30,11 +28,10 @@ public final class MineField extends GridPane {
         if (isInitialized()) {
             return;
         }
-        Random random = new Random();
         for (int i = 0; i < getColumnCount(); i++) {
             for (int j = 0; j < getRowCount(); j++) {
                 if ((1 < Math.abs(i - x) || 1 < Math.abs(j - y))
-                        && 0.8 < random.nextDouble()) {
+                        && 0.8 < App.random.nextDouble()) {
                     getCells()[i][j].placeMine();
                 }
             }
@@ -59,5 +56,4 @@ public final class MineField extends GridPane {
 
     private boolean _isInitialized;
     private Cell[][] _cells;
-    public final Random random = new Random();
 }

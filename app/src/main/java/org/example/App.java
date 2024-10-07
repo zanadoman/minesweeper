@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Random;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -25,4 +27,6 @@ public final class App extends Application {
     public static void main(String[] args) {
         launch();
     }
+
+    public static final Random random = new Random();
 }
