@@ -41,33 +41,33 @@
 }
 
 .neighbour-count1 {
-    -fx-text-fill: #0000FD;
+    -fx-text-fill: #2D79DB;
 }
 
 .neighbour-count2 {
-    -fx-text-fill: #017E00;
+    -fx-text-fill: #47904B;
 }
 
 .neighbour-count3 {
-    -fx-text-fill: #FE0000;
+    -fx-text-fill: #C7413E;
 }
 
 .neighbour-count4 {
-    -fx-text-fill: #010082;
+    -fx-text-fill: #793393;
 }
 
 .neighbour-count5 {
-    -fx-text-fill: #830003;
+    -fx-text-fill: #F1991E;
 }
 
 .neighbour-count6 {
-    -fx-text-fill: #008080;
+    -fx-text-fill: #3D98AA;
 }
 
 .neighbour-count7 {
-    -fx-text-fill: #000000;
+    -fx-text-fill: #44433F;
 }
 
 .neighbour-count8 {
-    -fx-text-fill: #808080;
+    -fx-text-fill: #A39C94;
 }
