@@ -59,4 +59,5 @@ public final class MineField extends GridPane {
 
     private boolean _isInitialized;
     private Cell[][] _cells;
+    public final Random random = new Random();
 }

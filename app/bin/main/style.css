@@ -13,61 +13,85 @@
 }
 
 .cell1 {
-    -fx-background-color: #AAD751;
+    -fx-background-color: #AAD751; /* Light */
 }
 
 .cell2 {
-    -fx-background-color: #A2D149;
+    -fx-background-color: #A2D149; /* Dark */
 }
 
 .cell1:hover, .cell2:hover {
-    -fx-background-color: #A2BF6A;
+    -fx-background-color: #A2BF6A; /* Hover */
 }
 
 .cell-revealed1 {
-    -fx-background-color: #E5C29F;
+    -fx-background-color: #E5C29F; /* Light */
 }
 
-.cell-revealed1 {
-    -fx-background-color: #D7B899;
-}
-
-.cell-exploded2 {
-    -fx-background-color: #F23607;
+.cell-revealed2 {
+    -fx-background-color: #D7B899; /* Dark */
 }
 
 .cell-exploded1 {
-    -fx-background-color: #E63307;
+    -fx-background-color: #F4C20D; /* Yellow */
+}
+
+.cell-exploded2 {
+    -fx-background-color: #F4840D; /* Orange */
+}
+
+.cell-exploded3 {
+    -fx-background-color: #008744; /* Green */
+}
+
+.cell-exploded4 {
+    -fx-background-color: #DB3236; /* Red */
+}
+
+.cell-exploded5 {
+    -fx-background-color: #4885ED; /* Blue */
+}
+
+.cell-exploded6 {
+    -fx-background-color: #48E6F1; /* Turquoise */
+}
+
+.cell-exploded7 {
+    -fx-background-color: #ED44B5; /* Pink */
+}
+
+.cell-exploded8 {
+    -fx-background-color: #B648F2; /* Purple */
 }
 
 .cell-adjacent-mine-count1 {
-    -fx-text-fill: #2D79DB;
+    -fx-text-fill: #2D79DB; /* Blue */
 }
 
 .cell-adjacent-mine-count2 {
-    -fx-text-fill: #47904B;
+    -fx-text-fill: #47904B; /* Green */
 }
 
 .cell-adjacent-mine-count3 {
-    -fx-text-fill: #C7413E;
+    -fx-text-fill: #C7413E; /* Red */
 }
 
 .cell-adjacent-mine-count4 {
-    -fx-text-fill: #793393;
+    -fx-text-fill: #793393; /* Purple */
 }
 
 .cell-adjacent-mine-count5 {
-    -fx-text-fill: #F1991E;
+    -fx-text-fill: #F1991E; /* Orange */
 }
 
 .cell-adjacent-mine-count6 {
-    -fx-text-fill: #3D98AA;
+    -fx-text-fill: #3D98AA; /* Turquoise */
 }
 
 .cell-adjacent-mine-count7 {
-    -fx-text-fill: #44433F;
+    -fx-text-fill: #44433F; /* Black */
 }
 
 .cell-adjacent-mine-count8 {
-    -fx-text-fill: #A39C94;
+    -fx-text-fill: #A39C94; /* Gray */
 }

@@ -77,7 +77,8 @@ public final class Cell extends Button {
             getField().initialize(getX(), getY());
         }
         if (_hasMine) {
-            getStyleClass().add("cell-exploded" + getStyleID());
+            getStyleClass()
+                    .add("cell-exploded" + getField().random.nextInt(1, 9));
             setGraphic(null);
             for (Cell[] cells : getField().getCells()) {
                 for (Cell cell : cells) {
