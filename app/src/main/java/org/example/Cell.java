@@ -14,7 +14,7 @@ public final class Cell extends Button {
             getStyleClass().addAll("borderless", "cell", "cell" + getStyleID());
             setCursor(Cursor.HAND);
             setOnMouseClicked(mouseEvent -> {
-                if (isRevealed()) {
+                if (((MineField) getParent()).isExploded() || isRevealed()) {
                     return;
                 }
                 if (mouseEvent.getButton() == MouseButton.PRIMARY) {
@@ -22,6 +22,9 @@ public final class Cell extends Button {
                         ((MineField) getParent()).reveal(getX(), getY());
                     }
                 } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                    if (!((MineField) getParent()).isInitialized()) {
+                        return;
+                    }
                     if (isFlagged()) {
                         removeFlag();
                     } else {
