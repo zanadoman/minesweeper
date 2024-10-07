@@ -14,7 +14,8 @@ public final class MineField extends GridPane {
                     continue;
                 }
                 for (Node cell : change.getAddedSubList()) {
-                    getCells()[GridPane.getColumnIndex(cell)][GridPane.getRowIndex(cell)] = (Cell) cell;
+                    getCells()[GridPane.getColumnIndex(cell)][GridPane
+                            .getRowIndex(cell)] = (Cell) cell;
                 }
             }
         });
@@ -32,7 +33,8 @@ public final class MineField extends GridPane {
         Random random = new Random();
         for (int i = 0; i < getColumnCount(); i++) {
             for (int j = 0; j < getRowCount(); j++) {
-                if ((1 < Math.abs(i - x) || 1 < Math.abs(j - y)) && 0.8 < random.nextDouble()) {
+                if ((1 < Math.abs(i - x) || 1 < Math.abs(j - y))
+                        && 0.8 < random.nextDouble()) {
                     getCells()[i][j].placeMine();
                 }
             }
