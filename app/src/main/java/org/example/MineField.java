@@ -4,8 +4,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 
 import javafx.collections.ListChangeListener;
-import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
+import javafx.scene.Node;
 
 public final class MineField extends GridPane {
     public MineField(int columnCount, int rowCount) {
