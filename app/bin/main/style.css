@@ -24,50 +24,50 @@
     -fx-background-color: #A2BF6A;
 }
 
-.cell1-revealed {
+.cell-revealed1 {
     -fx-background-color: #E5C29F;
 }
 
-.cell2-revealed {
+.cell-revealed1 {
     -fx-background-color: #D7B899;
 }
 
-.cell1-exploded {
+.cell-exploded2 {
     -fx-background-color: #F23607;
 }
 
-.cell2-exploded {
+.cell-exploded1 {
     -fx-background-color: #E63307;
 }
 
-.neighbour-count1 {
-    -fx-text-fill: #0000FD;
+.cell-adjacent-mine-count1 {
+    -fx-text-fill: #2D79DB;
 }
 
-.neighbour-count2 {
-    -fx-text-fill: #017E00;
+.cell-adjacent-mine-count2 {
+    -fx-text-fill: #47904B;
 }
 
-.neighbour-count3 {
-    -fx-text-fill: #FE0000;
+.cell-adjacent-mine-count3 {
+    -fx-text-fill: #C7413E;
 }
 
-.neighbour-count4 {
-    -fx-text-fill: #010082;
+.cell-adjacent-mine-count4 {
+    -fx-text-fill: #793393;
 }
 
-.neighbour-count5 {
-    -fx-text-fill: #830003;
+.cell-adjacent-mine-count5 {
+    -fx-text-fill: #F1991E;
 }
 
-.neighbour-count6 {
-    -fx-text-fill: #008080;
+.cell-adjacent-mine-count6 {
+    -fx-text-fill: #3D98AA;
 }
 
-.neighbour-count7 {
-    -fx-text-fill: #000000;
+.cell-adjacent-mine-count7 {
+    -fx-text-fill: #44433F;
 }
 
-.neighbour-count8 {
-    -fx-text-fill: #808080;
+.cell-adjacent-mine-count8 {
+    -fx-text-fill: #A39C94;
 }

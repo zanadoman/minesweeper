@@ -77,7 +77,7 @@ public final class Cell extends Button {
             getField().initialize(getX(), getY());
         }
         if (_hasMine) {
-            getStyleClass().add("cell" + getStyleID() + "-exploded");
+            getStyleClass().add("cell-exploded" + getStyleID());
             setGraphic(null);
             for (Cell[] cells : getField().getCells()) {
                 for (Cell cell : cells) {
@@ -88,10 +88,12 @@ public final class Cell extends Button {
                 }
             }
         } else {
-            getStyleClass().add("cell" + getStyleID() + "-revealed");
+            getStyleClass().add("cell-revealed" + getStyleID());
             setGraphic(null);
             if (0 < getAdjacentMineCount()) {
-                getStyleClass().add("neighbour-count" + getAdjacentMineCount());
+                getStyleClass()
+                        .add("cell-adjacent-mine-count"
+                                + getAdjacentMineCount());
                 setText(Integer.toString(getAdjacentMineCount()));
             } else {
                 forEachAdjacentCell(cell -> cell.explore());
