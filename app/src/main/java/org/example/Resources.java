@@ -3,9 +3,7 @@ package org.example;
 import javafx.scene.image.Image;
 
 public final class Resources {
-    private Resources() {
-        _flag = null;
-    }
+    public static final Resources instance = new Resources();
 
     public Image getFlag() {
         if (_flag == null) {
@@ -14,6 +12,9 @@ public final class Resources {
         return _flag;
     }
 
-    public static final Resources instance = new Resources();
+    private Resources() {
+        _flag = null;
+    }
+
     private Image _flag;
 }
