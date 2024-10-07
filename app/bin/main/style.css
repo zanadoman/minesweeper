@@ -12,10 +12,6 @@
     -fx-font-weight: bold;
 }
 
-.cell-circle {
-    -fx-fill: #00000070;
-}
-
 .cell1 {
     -fx-background-color: #AAD751; /* Light */
 }
@@ -34,6 +30,38 @@
 
 .cell-revealed2 {
     -fx-background-color: #D7B899; /* Dark */
+}
+
+.cell-adjacent-mine-count1 {
+    -fx-text-fill: #2D79DB; /* Blue */
+}
+
+.cell-adjacent-mine-count2 {
+    -fx-text-fill: #47904B; /* Green */
+}
+
+.cell-adjacent-mine-count3 {
+    -fx-text-fill: #C7413E; /* Red */
+}
+
+.cell-adjacent-mine-count4 {
+    -fx-text-fill: #793393; /* Purple */
+}
+
+.cell-adjacent-mine-count5 {
+    -fx-text-fill: #F1991E; /* Orange */
+}
+
+.cell-adjacent-mine-count6 {
+    -fx-text-fill: #3D98AA; /* Turquoise */
+}
+
+.cell-adjacent-mine-count7 {
+    -fx-text-fill: #44433F; /* Black */
+}
+
+.cell-adjacent-mine-count8 {
+    -fx-text-fill: #A39C94; /* Gray */
 }
 
 .cell-exploded1 {
@@ -68,34 +96,7 @@
     -fx-background-color: #B648F2; /* Purple */
 }
 
-.cell-adjacent-mine-count1 {
-    -fx-text-fill: #2D79DB; /* Blue */
-}
-
-.cell-adjacent-mine-count2 {
-    -fx-text-fill: #47904B; /* Green */
-}
-
-.cell-adjacent-mine-count3 {
-    -fx-text-fill: #C7413E; /* Red */
-}
-
-.cell-adjacent-mine-count4 {
-    -fx-text-fill: #793393; /* Purple */
-}
-
-.cell-adjacent-mine-count5 {
-    -fx-text-fill: #F1991E; /* Orange */
-}
-
-.cell-adjacent-mine-count6 {
-    -fx-text-fill: #3D98AA; /* Turquoise */
-}
-
-.cell-adjacent-mine-count7 {
-    -fx-text-fill: #44433F; /* Black */
-}
-
-.cell-adjacent-mine-count8 {
-    -fx-text-fill: #A39C94; /* Gray */
+.cell-circle {
+    -fx-radius: 25px;
+    -fx-fill: #00000060; /* Shade */
 }
