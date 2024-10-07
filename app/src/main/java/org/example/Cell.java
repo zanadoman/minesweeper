@@ -9,6 +9,7 @@ import javafx.scene.Cursor;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.Parent;
 
 public final class Cell extends Button {
@@ -79,7 +80,9 @@ public final class Cell extends Button {
         if (_hasMine) {
             getStyleClass()
                     .add("cell-exploded" + getField().random.nextInt(1, 9));
-            setGraphic(null);
+            Circle circle = new Circle((getWidth() + getHeight()) / 8);
+            circle.getStyleClass().add("cell-circle");
+            setGraphic(circle);
             for (Cell[] cells : getField().getCells()) {
                 for (Cell cell : cells) {
                     if (cell._hasMine) {

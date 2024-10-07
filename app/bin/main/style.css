@@ -12,6 +12,10 @@
     -fx-font-weight: bold;
 }
 
+.cell-circle {
+    -fx-fill: #00000070;
+}
+
 .cell1 {
     -fx-background-color: #AAD751; /* Light */
 }
