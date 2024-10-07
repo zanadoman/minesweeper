@@ -1,0 +1,73 @@
+.borderless {
+    -fx-background-radius: 0;
+    -fx-border: none;
+}
+
+.cell {
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+    -fx-max-width: 50px;
+    -fx-max-height: 50px;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.cell1 {
+    -fx-background-color: #AAD751;
+}
+
+.cell2 {
+    -fx-background-color: #A2D149;
+}
+
+.cell1:hover, .cell2:hover {
+    -fx-background-color: #A2BF6A;
+}
+
+.cell1-revealed {
+    -fx-background-color: #E5C29F;
+}
+
+.cell2-revealed {
+    -fx-background-color: #D7B899;
+}
+
+.cell1-exploded {
+    -fx-background-color: #F23607;
+}
+
+.cell2-exploded {
+    -fx-background-color: #E63307;
+}
+
+.neighbour-count1 {
+    -fx-text-fill: #0000FD;
+}
+
+.neighbour-count2 {
+    -fx-text-fill: #017E00;
+}
+
+.neighbour-count3 {
+    -fx-text-fill: #FE0000;
+}
+
+.neighbour-count4 {
+    -fx-text-fill: #010082;
+}
+
+.neighbour-count5 {
+    -fx-text-fill: #830003;
+}
+
+.neighbour-count6 {
+    -fx-text-fill: #008080;
+}
+
+.neighbour-count7 {
+    -fx-text-fill: #000000;
+}
+
+.neighbour-count8 {
+    -fx-text-fill: #808080;
+}

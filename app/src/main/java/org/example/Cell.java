@@ -112,7 +112,7 @@ public final class Cell extends Button {
     private void forEachAdjacentCell(Consumer<Cell> operation) {
         for (int i = getX() - 1; i <= getX() + 1; i++) {
             for (int j = getY() - 1; j <= getY() + 1; j++) {
-                if (0 <= i && i < getField().getColumnCount() && 0 <= j && j < getField().getRowCount()) {
+                if (0 <= i && i < getField().getColumnCount() && 0 <= j && j < getField().getRowCount() && (i != getX() || j != getY())) {
                     operation.accept(getField().getCells()[i][j]);
                 }
             }
