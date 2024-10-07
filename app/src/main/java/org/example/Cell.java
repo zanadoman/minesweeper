@@ -1,8 +1,8 @@
 package org.example;
 
 import javafx.application.Platform;
-import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.Cursor;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
@@ -45,6 +45,13 @@ public final class Cell extends Button {
     }
 
     public void placeMine() {
+        if (((MineField) getParent()).isInitialized()
+                || ((MineField) getParent()).isExploded()) {
+            return;
+        }
+        if (isRevealed() || hasMine()) {
+            return;
+        }
         _hasMine = true;
     }
 
@@ -53,7 +60,11 @@ public final class Cell extends Button {
     }
 
     public void reveal(int adjacentMineCount) {
-        if (isRevealed() || isFlagged()) {
+        if (!((MineField) getParent()).isInitialized()
+                || ((MineField) getParent()).isExploded()) {
+            return;
+        }
+        if (hasMine() || isRevealed() || isFlagged()) {
             return;
         }
         getStyleClass().remove("cell" + getStyleID());
@@ -67,6 +78,10 @@ public final class Cell extends Button {
     }
 
     public void explode() {
+        if (!((MineField) getParent()).isInitialized()
+                || ((MineField) getParent()).isExploded()) {
+            return;
+        }
         if (!hasMine() || isRevealed()) {
             return;
         }
@@ -88,6 +103,10 @@ public final class Cell extends Button {
     }
 
     public void placeFlag() {
+        if (!((MineField) getParent()).isInitialized()
+                || ((MineField) getParent()).isExploded()) {
+            return;
+        }
         if (isRevealed() || isFlagged()) {
             return;
         }
@@ -100,6 +119,10 @@ public final class Cell extends Button {
     }
 
     public void removeFlag() {
+        if (!((MineField) getParent()).isInitialized()
+                || ((MineField) getParent()).isExploded()) {
+            return;
+        }
         if (isRevealed() || !isFlagged()) {
             return;
         }
