@@ -111,9 +111,9 @@ public final class Cell extends Button {
             return;
         }
         ImageView imageView = new ImageView(Resources.instance.getFlag());
-        imageView.setFitWidth(getWidth() * 2);
+        imageView.setFitWidth(getWidth());
         imageView.setFitHeight(getHeight());
-        // imageView.setPreserveRatio(true);
+        imageView.setPreserveRatio(true);
         setGraphic(imageView);
         _isFlagged = true;
     }
