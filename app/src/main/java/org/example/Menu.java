@@ -9,22 +9,27 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 
-public final class Menu extends HBox {
+public final class Menu extends StackPane {
     public Menu() {
         getStyleClass().add("menu");
         progress = new Label();
         progress.getStyleClass().add("menu-label");
-        stopwatch = new Stopwatch();
-        getChildren().addAll(
-                progress,
-                stopwatch,
+        Region region = new Region();
+        HBox.setHgrow(region, Priority.ALWAYS);
+        HBox hBox = new HBox(progress, region,
                 newButton(Resources.instance.getRestart(),
                         eventHandler -> App.getMineField().clear(
                                 App.getMineField().getColumnCount(),
                                 App.getMineField().getRowCount())),
                 newButton(Resources.instance.getQuit(),
                         eventHandler -> Platform.exit()));
+        hBox.getStyleClass().add("menu");
+        stopwatch = new Stopwatch();
+        getChildren().addAll(hBox, stopwatch);
     }
 
     public final Label progress;
