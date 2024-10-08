@@ -10,7 +10,7 @@ public final class Stopwatch extends Label {
         getStyleClass().add("menu-label");
         setText(0, 0);
         _timeline = new Timeline(
-                new KeyFrame(Duration.seconds(1), actionEvent -> update()));
+                new KeyFrame(Duration.seconds(0.5), actionEvent -> update()));
         _timeline.setCycleCount(Timeline.INDEFINITE);
         _startTimeMillis = -1;
     }
