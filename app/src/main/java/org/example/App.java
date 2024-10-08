@@ -8,6 +8,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public final class App extends Application {
+    public static final Random random = new Random();
+
+    public static void main() {
+        launch();
+    }
+
     @Override
     public void start(Stage stage) {
         MineField mineField = new MineField(15, 15);
@@ -23,10 +29,4 @@ public final class App extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
-    public static void main(String[] args) {
-        launch();
-    }
-
-    public static final Random random = new Random();
 }

@@ -102,7 +102,7 @@ public final class Cell extends Button {
         return _isFlagged;
     }
 
-    public void placeFlag() {
+    private void placeFlag() {
         if (!((MineField) getParent()).isInitialized()
                 || ((MineField) getParent()).isExploded()) {
             return;
@@ -118,7 +118,7 @@ public final class Cell extends Button {
         _isFlagged = true;
     }
 
-    public void removeFlag() {
+    private void removeFlag() {
         if (!((MineField) getParent()).isInitialized()
                 || ((MineField) getParent()).isExploded()) {
             return;
