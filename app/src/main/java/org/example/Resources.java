@@ -12,6 +12,13 @@ public final class Resources {
         return _restart;
     }
 
+    public Image getMinimize() {
+        if (_minimize == null) {
+            _minimize = new Image("/minimize.png");
+        }
+        return _minimize;
+    }
+
     public Image getQuit() {
         if (_quit == null) {
             _quit = new Image("/quit.png");
@@ -28,11 +35,13 @@ public final class Resources {
 
     private Resources() {
         _restart = null;
+        _minimize = null;
         _quit = null;
         _flag = null;
     }
 
     private Image _restart;
+    private Image _minimize;
     private Image _quit;
     private Image _flag;
 }
