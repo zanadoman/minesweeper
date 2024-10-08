@@ -26,13 +26,13 @@ public final class MineField extends GridPane {
     public void clear(int columnCount, int rowCount) {
         getChildren().clear();
         _isInitialized = false;
+        _isExploded = false;
         _cells = new Cell[columnCount][rowCount];
         for (int i = 0; i < columnCount; i++) {
             for (int j = 0; j < rowCount; j++) {
                 add(new Cell(), i, j);
             }
         }
-        _isExploded = false;
     }
 
     public boolean isInitialized() {
@@ -71,13 +71,14 @@ public final class MineField extends GridPane {
     }
 
     private void initialize(int columnIndex, int rowIndex) {
-        if (isInitialized()) {
+        if (isInitialized() || isExploded()) {
             return;
         }
         for (int i = 0; i < getColumnCount(); i++) {
             for (int j = 0; j < getRowCount(); j++) {
-                if ((1 < Math.abs(i - columnIndex)
-                        || 1 < Math.abs(j - rowIndex))
+                if (!_cells[i][j].hasMine() && !_cells[i][j].isRevealed()
+                        && (1 < Math.abs(i - columnIndex)
+                                || 1 < Math.abs(j - rowIndex))
                         && 0.8 < App.random.nextDouble()) {
                     _cells[i][j].placeMine();
                 }
@@ -87,7 +88,8 @@ public final class MineField extends GridPane {
     }
 
     private void explore(int columnIndex, int rowIndex) {
-        if (_cells[columnIndex][rowIndex].hasMine()
+        if (!isInitialized() || isExploded()
+                || _cells[columnIndex][rowIndex].hasMine()
                 || _cells[columnIndex][rowIndex].isRevealed()
                 || _cells[columnIndex][rowIndex].isFlagged()) {
             return;
@@ -123,6 +125,6 @@ public final class MineField extends GridPane {
     }
 
     private boolean _isInitialized;
-    private Cell[][] _cells;
     private boolean _isExploded;
+    private Cell[][] _cells;
 }
