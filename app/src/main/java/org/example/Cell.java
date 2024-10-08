@@ -11,7 +11,7 @@ import javafx.scene.shape.Circle;
 public final class Cell extends Button {
     public Cell() {
         Platform.runLater(() -> {
-            getStyleClass().addAll("borderless", "cell", "cell" + getStyleID());
+            getStyleClass().addAll("cell", "cell" + getStyleID());
             setCursor(Cursor.HAND);
             setOnMouseClicked(mouseEvent -> {
                 if (((MineField) getParent()).isExploded() || isRevealed()) {

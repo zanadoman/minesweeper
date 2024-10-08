@@ -3,9 +3,11 @@
   src: url("/Spectral-Regular.ttf");
 }
 
-.borderless {
-    -fx-border: none;
-    -fx-background-radius: 0;
+.menu {
+    -fx-min-height: 75px;
+    -fx-max-height: 75px;
+    -fx-background-color: #4A752C;
+    -fx-alignment: center;
 }
 
 .cell {
@@ -13,6 +15,8 @@
     -fx-min-height: 50px;
     -fx-max-width: 50px;
     -fx-max-height: 50px;
+    -fx-border: none;
+    -fx-background-radius: 0;
     -fx-font-family: "Spectral-Regular";
     -fx-font-size: 24px;
     -fx-font-weight: bold;
