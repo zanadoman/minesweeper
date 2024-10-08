@@ -12,7 +12,9 @@ import javafx.scene.layout.HBox;
 public final class Menu extends HBox {
     public Menu() {
         getStyleClass().add("menu");
+        stopwatch = new Stopwatch();
         getChildren().addAll(
+                stopwatch,
                 newButton(Resources.instance.getRestart(),
                         eventHandler -> App.mineField.clear(
                                 App.mineField.getColumnCount(),
@@ -20,6 +22,8 @@ public final class Menu extends HBox {
                 newButton(Resources.instance.getQuit(),
                         eventHandler -> Platform.exit()));
     }
+
+    public final Stopwatch stopwatch;
 
     private static Button newButton(Image image,
             EventHandler<? super MouseEvent> eventHandler) {

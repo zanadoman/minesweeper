@@ -6,8 +6,14 @@
 .menu {
     -fx-min-height: 75px;
     -fx-max-height: 75px;
-    -fx-background-color: #4A752C;
+    -fx-background-color: #4A752C; /* Dark green */
     -fx-alignment: center;
+}
+
+.menu-label {
+    -fx-text-fill: #FFFFFF; /* White */
+    -fx-font-family: "Spectral-Regular";
+    -fx-font-size: 48px;
 }
 
 .menu-button {
@@ -15,7 +21,7 @@
     -fx-min-height: 50px;
     -fx-max-width: 50px;
     -fx-max-height: 50px;
-    -fx-background-color: #00000000;
+    -fx-background-color: #00000000; /* Transparent */
 }
 
 .menu-button:hover {
