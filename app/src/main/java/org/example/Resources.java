@@ -5,6 +5,20 @@ import javafx.scene.image.Image;
 public final class Resources {
     public static final Resources instance = new Resources();
 
+    public Image getRestart() {
+        if (_restart == null) {
+            _restart = new Image("/restart.png");
+        }
+        return _restart;
+    }
+
+    public Image getQuit() {
+        if (_quit == null) {
+            _quit = new Image("/quit.png");
+        }
+        return _quit;
+    }
+
     public Image getFlag() {
         if (_flag == null) {
             _flag = new Image("/flag.png");
@@ -13,8 +27,12 @@ public final class Resources {
     }
 
     private Resources() {
+        _restart = null;
+        _quit = null;
         _flag = null;
     }
 
+    private Image _restart;
+    private Image _quit;
     private Image _flag;
 }
