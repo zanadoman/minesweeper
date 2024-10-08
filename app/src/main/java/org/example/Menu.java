@@ -16,6 +16,14 @@ import javafx.scene.layout.StackPane;
 public final class Menu extends StackPane {
     public Menu() {
         getStyleClass().add("menu");
+        setOnMousePressed(pressEvent -> {
+            setOnMouseDragged(dragEvent -> {
+                App.getStage()
+                        .setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+                App.getStage()
+                        .setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+            });
+        });
         progress = new Label();
         progress.getStyleClass().add("menu-label");
         Region filler = new Region();
