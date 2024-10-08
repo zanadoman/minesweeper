@@ -46,10 +46,8 @@ public final class Cell extends Button {
 
     public void placeMine() {
         if (((MineField) getParent()).isInitialized()
-                || ((MineField) getParent()).isExploded()) {
-            return;
-        }
-        if (isRevealed() || hasMine()) {
+                || ((MineField) getParent()).isExploded() || isRevealed()
+                || hasMine()) {
             return;
         }
         _hasMine = true;
@@ -61,10 +59,8 @@ public final class Cell extends Button {
 
     public void reveal(int adjacentMineCount) {
         if (!((MineField) getParent()).isInitialized()
-                || ((MineField) getParent()).isExploded()) {
-            return;
-        }
-        if (hasMine() || isRevealed() || isFlagged()) {
+                || ((MineField) getParent()).isExploded() || hasMine()
+                || isRevealed() || isFlagged()) {
             return;
         }
         getStyleClass().remove("cell" + getStyleID());
@@ -79,10 +75,8 @@ public final class Cell extends Button {
 
     public void explode() {
         if (!((MineField) getParent()).isInitialized()
-                || ((MineField) getParent()).isExploded()) {
-            return;
-        }
-        if (!hasMine() || isRevealed()) {
+                || ((MineField) getParent()).isExploded() || !hasMine()
+                || isRevealed()) {
             return;
         }
         if (isFlagged()) {
@@ -104,10 +98,8 @@ public final class Cell extends Button {
 
     private void placeFlag() {
         if (!((MineField) getParent()).isInitialized()
-                || ((MineField) getParent()).isExploded()) {
-            return;
-        }
-        if (isRevealed() || isFlagged()) {
+                || ((MineField) getParent()).isExploded() || isRevealed()
+                || isFlagged()) {
             return;
         }
         ImageView imageView = new ImageView(Resources.instance.getFlag());
@@ -120,10 +112,8 @@ public final class Cell extends Button {
 
     private void removeFlag() {
         if (!((MineField) getParent()).isInitialized()
-                || ((MineField) getParent()).isExploded()) {
-            return;
-        }
-        if (isRevealed() || !isFlagged()) {
+                || ((MineField) getParent()).isExploded() || isRevealed()
+                || !isFlagged()) {
             return;
         }
         setGraphic(null);

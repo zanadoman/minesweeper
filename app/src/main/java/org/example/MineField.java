@@ -99,6 +99,16 @@ public final class MineField extends GridPane {
         }
     }
 
+    private int getAdjacentMineCount(int columnIndex, int rowIndex) {
+        AtomicInteger adjacentMineCount = new AtomicInteger();
+        forEachAdjacentCell(columnIndex, rowIndex, (i, j) -> {
+            if (_cells[i][j].hasMine()) {
+                adjacentMineCount.getAndIncrement();
+            }
+        });
+        return adjacentMineCount.get();
+    }
+
     private void forEachAdjacentCell(int columnIndex, int rowIndex,
             BiConsumer<Integer, Integer> operation) {
         for (int i = columnIndex - 1; i <= columnIndex + 1; i++) {
@@ -110,16 +120,6 @@ public final class MineField extends GridPane {
                 }
             }
         }
-    }
-
-    private int getAdjacentMineCount(int columnIndex, int rowIndex) {
-        AtomicInteger adjacentMineCount = new AtomicInteger();
-        forEachAdjacentCell(columnIndex, rowIndex, (i, j) -> {
-            if (_cells[i][j].hasMine()) {
-                adjacentMineCount.getAndIncrement();
-            }
-        });
-        return adjacentMineCount.get();
     }
 
     private boolean _isInitialized;
