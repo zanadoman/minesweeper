@@ -12,28 +12,28 @@ public final class Cell extends Button {
     public Cell() {
         Platform.runLater(() -> {
             getStyleClass().addAll("cell", "cell" + getStyleID());
-            setCursor(Cursor.HAND);
-            setOnMouseClicked(mouseEvent -> {
-                if (((MineField) getParent()).isExploded() || isRevealed()) {
+        });
+        setCursor(Cursor.HAND);
+        setOnMouseClicked(mouseEvent -> {
+            if (((MineField) getParent()).isExploded() || isRevealed()) {
+                return;
+            }
+            if (mouseEvent.getButton() == MouseButton.PRIMARY) {
+                if (!isFlagged()) {
+                    ((MineField) getParent()).reveal(
+                            GridPane.getColumnIndex(this),
+                            GridPane.getRowIndex(this));
+                }
+            } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                if (!((MineField) getParent()).isInitialized()) {
                     return;
                 }
-                if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-                    if (!isFlagged()) {
-                        ((MineField) getParent()).reveal(
-                                GridPane.getColumnIndex(this),
-                                GridPane.getRowIndex(this));
-                    }
-                } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                    if (!((MineField) getParent()).isInitialized()) {
-                        return;
-                    }
-                    if (isFlagged()) {
-                        removeFlag();
-                    } else {
-                        placeFlag();
-                    }
+                if (isFlagged()) {
+                    removeFlag();
+                } else {
+                    placeFlag();
                 }
-            });
+            }
         });
         _hasMine = false;
         _isRevealed = false;
