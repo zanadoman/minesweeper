@@ -33,6 +33,9 @@ public final class MineField extends GridPane {
                 add(new Cell(), i, j);
             }
         }
+        _safeCellCount = getColumnCount() * getRowCount();
+        _revealedCellCount = 0;
+        updateProgress();
         App.getMenu().stopwatch.reset();
     }
 
@@ -65,6 +68,8 @@ public final class MineField extends GridPane {
         } else {
             int adjacentMineCount = getAdjacentMineCount(columnIndex, rowIndex);
             _cells[columnIndex][rowIndex].reveal(adjacentMineCount);
+            _revealedCellCount++;
+            updateProgress();
             if (adjacentMineCount == 0) {
                 forEachAdjacentCell(columnIndex, rowIndex,
                         (i, j) -> explore(i, j));
@@ -83,6 +88,7 @@ public final class MineField extends GridPane {
                                 || 1 < Math.abs(j - rowIndex))
                         && 0.8 < App.random.nextDouble()) {
                     _cells[i][j].placeMine();
+                    _safeCellCount--;
                 }
             }
         }
@@ -99,8 +105,26 @@ public final class MineField extends GridPane {
         }
         int adjacentMineCount = getAdjacentMineCount(columnIndex, rowIndex);
         _cells[columnIndex][rowIndex].reveal(adjacentMineCount);
+        _revealedCellCount++;
+        updateProgress();
         if (adjacentMineCount == 0) {
             forEachAdjacentCell(columnIndex, rowIndex, (i, j) -> explore(i, j));
+        }
+    }
+
+    private void updateProgress() {
+        if (isExploded()) {
+            return;
+        }
+        _isExploded = _revealedCellCount == _safeCellCount;
+        if (isExploded()) {
+            App.getMenu().progress.setText("You won!");
+            App.getMenu().stopwatch.stop();
+        } else {
+            App.getMenu().progress.setText(Integer
+                    .toString((int) Math.floor((double) _revealedCellCount
+                            / (double) _safeCellCount * 100.))
+                    + '%');
         }
     }
 
@@ -130,4 +154,6 @@ public final class MineField extends GridPane {
     private boolean _isInitialized;
     private boolean _isExploded;
     private Cell[][] _cells;
+    private int _safeCellCount;
+    private int _revealedCellCount;
 }
