@@ -18,13 +18,16 @@ public final class Menu extends StackPane {
         getStyleClass().add("menu");
         progress = new Label();
         progress.getStyleClass().add("menu-label");
-        Region region = new Region();
-        HBox.setHgrow(region, Priority.ALWAYS);
-        HBox hBox = new HBox(progress, region,
+        Region filler = new Region();
+        HBox.setHgrow(filler, Priority.ALWAYS);
+        Region gap = new Region();
+        gap.setPrefWidth(10);
+        HBox hBox = new HBox(progress, filler,
                 newButton(Resources.instance.getRestart(),
                         eventHandler -> App.getMineField().clear(
                                 App.getMineField().getColumnCount(),
                                 App.getMineField().getRowCount())),
+                gap,
                 newButton(Resources.instance.getQuit(),
                         eventHandler -> Platform.exit()));
         hBox.getStyleClass().add("menu");
