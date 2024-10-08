@@ -10,13 +10,25 @@
     -fx-alignment: center;
 }
 
+.menu-button {
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+    -fx-max-width: 50px;
+    -fx-max-height: 50px;
+    -fx-background-color: #00000000;
+}
+
+.menu-button:hover {
+    -fx-opacity: 75%;
+}
+
 .cell {
     -fx-min-width: 50px;
     -fx-min-height: 50px;
     -fx-max-width: 50px;
     -fx-max-height: 50px;
-    -fx-border: none;
     -fx-background-radius: 0;
+    -fx-border: none;
     -fx-font-family: "Spectral-Regular";
     -fx-font-size: 24px;
     -fx-font-weight: bold;

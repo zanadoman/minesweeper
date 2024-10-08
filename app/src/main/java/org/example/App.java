@@ -10,6 +10,7 @@ import javafx.stage.StageStyle;
 
 public final class App extends Application {
     public static final Random random = new Random();
+    public static final MineField mineField = new MineField(15, 15);
 
     public static void main() {
         launch();
@@ -17,7 +18,6 @@ public final class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        MineField mineField = new MineField(15, 15);
         Scene scene = new Scene(new VBox(new Menu(), mineField));
         scene.getStylesheets().add("/style.css");
         stage.initStyle(StageStyle.UNDECORATED);
