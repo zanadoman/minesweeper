@@ -16,9 +16,9 @@ public final class Menu extends HBox {
         getChildren().addAll(
                 stopwatch,
                 newButton(Resources.instance.getRestart(),
-                        eventHandler -> App.mineField.clear(
-                                App.mineField.getColumnCount(),
-                                App.mineField.getRowCount())),
+                        eventHandler -> App.getMineField().clear(
+                                App.getMineField().getColumnCount(),
+                                App.getMineField().getRowCount())),
                 newButton(Resources.instance.getQuit(),
                         eventHandler -> Platform.exit()));
     }

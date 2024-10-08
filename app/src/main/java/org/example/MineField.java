@@ -33,6 +33,7 @@ public final class MineField extends GridPane {
                 add(new Cell(), i, j);
             }
         }
+        App.getMenu().stopwatch.reset();
     }
 
     public boolean isInitialized() {
@@ -60,6 +61,7 @@ public final class MineField extends GridPane {
                 }
             }
             _isExploded = true;
+            App.getMenu().stopwatch.stop();
         } else {
             int adjacentMineCount = getAdjacentMineCount(columnIndex, rowIndex);
             _cells[columnIndex][rowIndex].reveal(adjacentMineCount);
@@ -85,6 +87,7 @@ public final class MineField extends GridPane {
             }
         }
         _isInitialized = true;
+        App.getMenu().stopwatch.start();
     }
 
     private void explore(int columnIndex, int rowIndex) {
