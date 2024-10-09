@@ -118,7 +118,7 @@ public final class MineField extends GridPane {
         }
         _isExploded = _revealedCellCount == _safeCellCount;
         if (isExploded()) {
-            App.getMenu().progress.setText("YOU WIN!");
+            App.getMenu().progress.setText("You Win!");
             App.getMenu().stopwatch.stop();
         } else {
             App.getMenu().progress.setText(Integer
