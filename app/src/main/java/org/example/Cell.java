@@ -102,7 +102,7 @@ public final class Cell extends Button {
                 || isFlagged()) {
             return;
         }
-        ImageView imageView = new ImageView(Resources.instance.getFlag());
+        ImageView imageView = new ImageView(Resources.flag);
         imageView.setFitWidth(getWidth());
         imageView.setFitHeight(getHeight());
         imageView.setPreserveRatio(true);

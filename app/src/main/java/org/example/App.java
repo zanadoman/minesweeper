@@ -36,7 +36,7 @@ public final class App extends Application {
         scene.getStylesheets().add("/style.css");
         _stage.initStyle(StageStyle.UNDECORATED);
         _stage.setTitle("Minesweeper");
-        _stage.getIcons().add(Resources.instance.getFlag());
+        _stage.getIcons().add(Resources.flag);
         _stage.setMinWidth(getMineField().getColumnCount() * 50);
         _stage.setMinHeight(75 + getMineField().getRowCount() * 50);
         _stage.setMaxWidth(_stage.getMinWidth());
