@@ -1,6 +1,32 @@
-.borderless {
-    -fx-background-radius: 0;
-    -fx-border: none;
+@font-face {
+  font-family: "Spectral-Regular";
+  src: url("/Spectral-Regular.ttf");
+}
+
+.menu {
+    -fx-min-height: 75px;
+    -fx-max-height: 75px;
+    -fx-background-color: #4A752C; /* Dark green */
+    -fx-alignment: center;
+}
+
+.menu-label {
+    -fx-text-fill: #FFFFFF; /* White */
+    -fx-font-family: "Spectral-Regular";
+    -fx-font-size: 48px;
+}
+
+.menu-button {
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+    -fx-max-width: 50px;
+    -fx-max-height: 50px;
+    -fx-background-color: #00000000; /* Transparent */
+    -fx-padding: 5px;
+}
+
+.menu-button:hover {
+    -fx-opacity: 75%;
 }
 
 .cell {
@@ -8,6 +34,9 @@
     -fx-min-height: 50px;
     -fx-max-width: 50px;
     -fx-max-height: 50px;
+    -fx-background-radius: 0;
+    -fx-border: none;
+    -fx-font-family: "Spectral-Regular";
     -fx-font-size: 24px;
     -fx-font-weight: bold;
 }
@@ -21,7 +50,7 @@
 }
 
 .cell1:hover, .cell2:hover {
-    -fx-background-color: #A2BF6A; /* Hover */
+    -fx-background-color: #A2BF6A; /* Selection */
 }
 
 .cell-revealed1 {
@@ -65,38 +94,37 @@
 }
 
 .cell-exploded1 {
-    -fx-background-color: #F4C20D; /* Yellow */
-}
-
-.cell-exploded2 {
-    -fx-background-color: #F4840D; /* Orange */
-}
-
-.cell-exploded3 {
-    -fx-background-color: #008744; /* Green */
-}
-
-.cell-exploded4 {
-    -fx-background-color: #DB3236; /* Red */
-}
-
-.cell-exploded5 {
     -fx-background-color: #4885ED; /* Blue */
 }
 
-.cell-exploded6 {
-    -fx-background-color: #48E6F1; /* Turquoise */
+.cell-exploded2 {
+    -fx-background-color: #008744; /* Green */
 }
 
-.cell-exploded7 {
+.cell-exploded3 {
+    -fx-background-color: #F4840D; /* Orange */
+}
+
+.cell-exploded4 {
     -fx-background-color: #ED44B5; /* Pink */
 }
 
-.cell-exploded8 {
+.cell-exploded5 {
     -fx-background-color: #B648F2; /* Purple */
 }
 
+.cell-exploded6 {
+    -fx-background-color: #DB3236; /* Red */
+}
+
+.cell-exploded7 {
+    -fx-background-color: #48E6F1; /* Turquoise */
+}
+
+.cell-exploded8 {
+    -fx-background-color: #F4C20D; /* Yellow */
+}
+
 .cell-circle {
-    -fx-radius: 25px;
     -fx-fill: #00000060; /* Shade */
 }
