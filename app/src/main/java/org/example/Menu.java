@@ -36,12 +36,12 @@ public final class Menu extends StackPane {
         region4.setPrefWidth(10);
         HBox hBox = new HBox(region1, progress, region2,
                 newButton(Resources.restart,
-                        eventHandler -> App.getMineField().clear(
-                                App.getMineField().getColumnCount(),
-                                App.getMineField().getRowCount())),
+                        mouseEvent -> App.getMineField()
+                                .clear(App.getMineField().getColumnCount(),
+                                        App.getMineField().getRowCount())),
                 region3,
                 newButton(Resources.minimize,
-                        eventHandler -> App.getStage().setIconified(true)),
+                        mouseEvent -> App.getStage().setIconified(true)),
                 region4,
                 newButton(Resources.quit, eventHandler -> Platform.exit()));
         hBox.getStyleClass().add("menu");
