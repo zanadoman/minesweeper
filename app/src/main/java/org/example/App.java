@@ -35,12 +35,12 @@ public final class App extends Application {
         Scene scene = new Scene(new VBox(getMenu(), getMineField()));
         scene.getStylesheets().add("/style.css");
         _stage.initStyle(StageStyle.UNDECORATED);
-        _stage.setTitle("Minesweeper");
-        _stage.getIcons().add(Resources.flag);
         _stage.setMinWidth(getMineField().getColumnCount() * 50);
         _stage.setMinHeight(75 + getMineField().getRowCount() * 50);
         _stage.setMaxWidth(_stage.getMinWidth());
         _stage.setMaxHeight(_stage.getMinHeight());
+        _stage.setTitle("Minesweeper");
+        _stage.getIcons().add(Resources.flag);
         _stage.setScene(scene);
         _stage.show();
     }
