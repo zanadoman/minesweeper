@@ -10,7 +10,7 @@ public final class Stopwatch extends Label {
         getStyleClass().add("menu-label");
         setText(0, 0);
         _timeline = new Timeline(
-                new KeyFrame(Duration.seconds(0.5), actionEvent -> update()));
+                new KeyFrame(Duration.seconds(.5), actionEvent -> update()));
         _timeline.setCycleCount(Timeline.INDEFINITE);
         _startTimeMillis = -1;
     }
@@ -30,14 +30,14 @@ public final class Stopwatch extends Label {
         setText(0, 0);
     }
 
+    private void setText(long minutes, long seconds) {
+        setText(String.format("%02d:%02d", minutes, seconds));
+    }
+
     private void update() {
         long elapsedTimeSeconds = (System.currentTimeMillis()
                 - _startTimeMillis) / 1000;
         setText(elapsedTimeSeconds / 60, elapsedTimeSeconds % 60);
-    }
-
-    private void setText(long minutes, long seconds) {
-        setText(String.format("%02d:%02d", minutes, seconds));
     }
 
     private Timeline _timeline;
